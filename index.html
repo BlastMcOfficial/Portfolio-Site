@@ -103,12 +103,14 @@
         .section-title { font-size: 3rem; text-align: center; margin-bottom: 4rem; font-weight: 800; }
         .section-title::after { content: ''; display: block; width: 70px; height: 4px; background: var(--gradient); margin: 1rem auto; border-radius: 2px; }
 
-        /* --- Click to Enlarge functionality --- */
-        .clickable-card { cursor: pointer; transition: transform 0.4s ease, box-shadow 0.4s ease; }
-        .clickable-card.enlarged { transform: scale(1.03); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        /* --- Updated Click to Enlarge --- */
+        .clickable-card { cursor: pointer; position: relative; transition: transform 0.4s ease, box-shadow 0.4s ease; }
+        .clickable-card.enlarged { transform: scale(1.08) !important; z-index: 10; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
 
         .about-container { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: flex-start; }
         .about-text-card { background: var(--bg-card); border: 1px solid var(--border-color); padding: 2rem; border-radius: 20px; }
+        .about-card-content { display: flex; align-items: center; gap: 2rem; }
+        .about-inline-avatar { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
         .about-text-card h3 { font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--text-primary); font-weight: 700; }
         .about-text-card p { color: var(--text-secondary); margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
         .about-stats { display: flex; flex-direction: column; gap: 2rem; }
@@ -152,7 +154,7 @@
 
         .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
-        @media (max-width: 900px) { .about-container { grid-template-columns: 1fr; gap: 4rem; } }
+        @media (max-width: 900px) { .about-container { grid-template-columns: 1fr; gap: 4rem; } .about-card-content { flex-direction: column; text-align: center; } }
         @media (max-width: 768px) { .hero-title { font-size: 3rem; } .section-title { font-size: 2.5rem; } .nav-container { justify-content: space-between; width: 100%; } .menu-toggle { display: flex; } .nav-links { display: none; } }
     </style>
 </head>
@@ -182,9 +184,14 @@
         <h2 class="section-title fade-in">About <span class="gradient-text">Me</span></h2>
         <div class="about-container">
             <div class="about-text-card fade-in clickable-card">
-                <h3>A Passionate Developer from India</h3>
-                <p>I'm a self-taught full-stack developer with a deep passion for creating innovative digital experiences. My journey started with a fascination for how technology can connect people, which led me to the world of Discord bot development.</p>
-                <p>I thrive on solving complex problems and turning ambitious ideas into reality, focusing on building tools that are efficient, user-friendly, and impactful.</p>
+                <div class="about-card-content">
+                    <img src="1000429378.jpg" alt="Avatar" class="about-inline-avatar">
+                    <div>
+                        <h3>A Passionate Developer from India</h3>
+                        <p>I'm a self-taught full-stack developer with a deep passion for creating innovative digital experiences. My journey started with a fascination for how technology can connect people, which led me to the world of Discord bot development.</p>
+                        <p>I thrive on solving complex problems and turning ambitious ideas into reality, focusing on building tools that are efficient, user-friendly, and impactful.</p>
+                    </div>
+                </div>
             </div>
             <div class="about-stats fade-in">
                 <div class="stat-item clickable-card"><h4>5+</h4><p>Years of Experience</p></div>
@@ -200,7 +207,7 @@
             <div class="tech-card fade-in clickable-card"><div class="tech-header"><h3>Python</h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg></div><div class="tech-info"><span>Language</span><span>98%</span></div><div class="progress-bar"><div class="progress" style="width: 98%;"></div></div></div>
             <div class="tech-card fade-in clickable-card"><div class="tech-header"><h3>JavaScript</h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div><div class="tech-info"><span>Language</span><span>85%</span></div><div class="progress-bar"><div class="progress" style="width: 85%;"></div></div></div>
             <div class="tech-card fade-in clickable-card"><div class="tech-header"><h3>Node.js</h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg></div><div class="tech-info"><span>Backend</span><span>88%</span></div><div class="progress-bar"><div class="progress" style="width: 88%;"></div></div></div>
-            <div class="tech-card fade-in clickable-card"><div class="tech-header"><h3>HTML & CSS</h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path></svg></div><div class="tech-info"><span>Frontend</span><span>95%</span></div><div class="progress-bar"><div class="progress" style="width: 95%;"></div></div></div>
+            <div class="tech-card fade-in clickable-card"><div class="tech-header"><h3>HTML & CSS</h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></div><div class="tech-info"><span>Frontend</span><span>95%</span></div><div class="progress-bar"><div class="progress" style="width: 95%;"></div></div></div>
             <div class="tech-card fade-in clickable-card"><div class="tech-header"><h3>React</h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2"></circle><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48 0a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"></path></svg></div><div class="tech-info"><span>Frontend</span><span>75%</span></div><div class="progress-bar"><div class="progress" style="width: 75%;"></div></div></div>
             <div class="tech-card fade-in clickable-card"><div class="tech-header"><h3>TypeScript</h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l7 4-7 4"></path></svg></div><div class="tech-info"><span>Language</span><span>70%</span></div><div class="progress-bar"><div class="progress" style="width: 70%;"></div></div></div>
         </div>
@@ -241,11 +248,10 @@
 
             setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 2500);
 
-            // IMPORTANT: For status to work, you MUST join the Lanyard Discord server: https://discord.gg/lanyard
+            // Discord Status Fetch
             const DISCORD_ID = '1432771000629596225';
             const statusIndicator = document.querySelector('.status-indicator');
             const statusText = document.querySelector('.status-text');
-
             fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`)
                 .then(response => response.json())
                 .then(data => {
@@ -254,27 +260,23 @@
                         statusIndicator.className = `status-indicator ${discord_status}`;
                         const game = activities.find(act => act.type === 0);
                         statusText.textContent = game ? `Playing ${game.name}` : discord_status.charAt(0).toUpperCase() + discord_status.slice(1);
-                    } else { statusText.textContent = 'Status not available'; }
+                    } else { statusText.textContent = 'Join Lanyard Server'; }
                 }).catch(() => { statusText.textContent = 'Could not fetch status'; });
 
+            // Scroll Animations
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } });
             }, { threshold: 0.1 });
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
             
-            // --- New Click to Enlarge Script ---
+            // Click to Enlarge Script
             document.querySelectorAll('.clickable-card').forEach(card => {
                 card.addEventListener('click', function(e) {
-                    if (e.target.closest('a')) return; // Ignore clicks on links within the card
-                    
-                    // If this card is already enlarged, just shrink it
+                    if (e.target.closest('a')) return;
                     if (this.classList.contains('enlarged')) {
                         this.classList.remove('enlarged');
                     } else {
-                        // Shrink any other enlarged card before enlarging this one
-                        document.querySelectorAll('.clickable-card.enlarged').forEach(otherCard => {
-                            otherCard.classList.remove('enlarged');
-                        });
+                        document.querySelectorAll('.clickable-card.enlarged').forEach(other => other.classList.remove('enlarged'));
                         this.classList.add('enlarged');
                     }
                 });
