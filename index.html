@@ -107,11 +107,11 @@
         .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
         .project-title-group { display: flex; align-items: center; gap: 1rem; }
         .project-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); padding: 5px; }
-        .project-icon img { width: 100%; height: 100%; object-fit: contain; } /* Changed from svg to img */
+        .project-icon img { width: 100%; height: 100%; object-fit: contain; }
         .project-title { font-size: 1.2rem; font-weight: 600; }
-        .project-meta { text-align: right; }
-        .project-meta span { background: rgba(255,255,255,0.1); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-top: 5px; }
-        .project-description { color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.6; }
+        .project-meta { text-align: right; white-space: nowrap; }
+        .project-meta span { background: rgba(255,255,255,0.1); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-top: 5px; margin-left: 5px; }
+        .project-description { color: var(--text-secondary); margin: 1rem 0 1.5rem; font-size: 0.95rem; line-height: 1.6; }
         .project-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; }
         .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; }
         .project-tech span { background: rgba(142, 68, 173, 0.1); color: #c398de; border: 1px solid rgba(142, 68, 173, 0.2); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.8rem; }
@@ -200,10 +200,7 @@
                 <div class="project-content">
                     <div class="project-header">
                         <div class="project-title-group">
-                            <div class="project-icon">
-                                <!-- REPLACE 'ferox-icon.png' with your image file -->
-                                <img src="ferox-icon.png" alt="FeroX Icon">
-                            </div>
+                            <div class="project-icon"><img src="ferox-icon.png" alt="FeroX Icon"></div>
                             <h3 class="project-title">FeroX Development</h3>
                         </div>
                         <div class="project-meta"><span title="Featured">⭐ Featured</span><span>Production</span></div>
@@ -211,7 +208,13 @@
                     <p class="project-description">A premier development hub and community for creators and innovators. Join us to collaborate, learn, and build the future.</p>
                     <div class="project-footer">
                         <div class="project-tech"><span>Community</span><span>Node.js</span></div>
-                        <div class="project-links"><a href="https://discord.gg/feroxdevs" target="_blank" class="btn btn-sm">Join Discord</a></div>
+                        <div class="project-links">
+                            <a href="https://www.youtube.com/@FeroXDevelopment" target="_blank" class="btn btn-sm">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 5.15-.27 1.35-1.27 2.35-2.62 2.62-1.35.28-3.8.44-5.15.44-2.19 0-3.8-.16-5.15-.44-1.35-.27-2.35-1.27-2.62-2.62C3.16 15.8 3 14.19 3 12c0-2.19.16-3.8.44-5.15C3.71 5.5 4.71 4.5 6.06 4.23 7.42 4.16 9.81 4 12 4c2.19 0 3.8.16 5.15.44 1.35.27 2.35 1.27 2.62 2.62.28 1.35.44 2.96.44 5.15z"></path></svg>
+                                YouTube
+                            </a>
+                            <a href="https://discord.gg/feroxdevs" target="_blank" class="btn btn-sm">Join Discord</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -220,10 +223,7 @@
                 <div class="project-content">
                     <div class="project-header">
                         <div class="project-title-group">
-                            <div class="project-icon">
-                                <!-- REPLACE 'arvix-icon.png' with your image file -->
-                                <img src="arvix-icon.png" alt="Arvix Icon">
-                            </div>
+                            <div class="project-icon"><img src="arvix-icon.png" alt="Arvix Icon"></div>
                             <h3 class="project-title">Arvix</h3>
                         </div>
                         <div class="project-meta"><span>Coming Soon</span></div>
@@ -239,10 +239,7 @@
                 <div class="project-content">
                     <div class="project-header">
                         <div class="project-title-group">
-                            <div class="project-icon">
-                                <!-- REPLACE 'laira-icon.png' with your image file -->
-                                <img src="laira-icon.png" alt="Laira Icon">
-                            </div>
+                            <div class="project-icon"><img src="laira-icon.png" alt="Laira Icon"></div>
                             <h3 class="project-title">Laira</h3>
                         </div>
                         <div class="project-meta"><span>Coming Soon</span></div>
@@ -282,28 +279,18 @@
 
             setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 2500);
 
-            // Discord Status Fetch
             const DISCORD_ID = '1432771000629596225';
             const statusIndicator = document.querySelector('.status-indicator');
             const statusText = document.querySelector('.status-text');
             fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`)
                 .then(response => response.json())
-                .then(data => {
-                    if (data.success && data.data.discord_user) {
-                        const { discord_status, activities } = data.data;
-                        statusIndicator.className = `status-indicator ${discord_status}`;
-                        const game = activities.find(act => act.type === 0);
-                        statusText.textContent = game ? `Playing ${game.name}` : discord_status.charAt(0).toUpperCase() + discord_status.slice(1);
-                    } else { statusText.textContent = 'Join Lanyard Server'; }
-                }).catch(() => { statusText.textContent = 'Could not fetch status'; });
+                .then(_0x39988a=>{if(_0x39988a.success&&_0x39988a.data.discord_user){const{discord_status,activities}=_0x39988a.data;statusIndicator.className=`status-indicator ${discord_status}`;const _0x4c9a6a=activities.find(_0x18181a=>_0x18181a.type===0);statusText.textContent=_0x4c9a6a?`Playing ${_0x4c9a6a.name}`:discord_status.charAt(0).toUpperCase()+discord_status.slice(1)}else{statusText.textContent='Join Lanyard Server'}}).catch(()=>{statusText.textContent='Could not fetch status'});
 
-            // Scroll Animations
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } });
             }, { threshold: 0.1 });
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
             
-            // Click to Enlarge Script
             document.querySelectorAll('.clickable-card').forEach(card => {
                 card.addEventListener('click', function(e) {
                     if (e.target.closest('a')) return;
