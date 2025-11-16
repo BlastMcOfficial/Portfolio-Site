@@ -31,9 +31,9 @@
             color: var(--text-primary);
             overflow-x: hidden;
             line-height: 1.7;
+            scroll-behavior: smooth;
         }
 
-        /* --- New Additions: Aurora & Spotlight --- */
         .spotlight {
             position: fixed;
             top: 0;
@@ -64,9 +64,7 @@
             background-size: 400% 400%;
             animation: aurora 15s ease infinite;
         }
-        /* --- End New Additions --- */
 
-        /* Enhanced Loading Animation */
         #loader {
             position: fixed;
             top: 0;
@@ -115,8 +113,6 @@
             100% { transform: rotateX(-30deg) rotateY(315deg); }
         }
 
-
-        /* Navigation */
         nav {
             position: fixed;
             top: 20px;
@@ -138,8 +134,6 @@
         .nav-links a:hover { color: var(--accent); }
         .menu-toggle { display: none; }
 
-
-        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -149,7 +143,6 @@
             text-align: center;
         }
         
-        /* New Avatar Style */
         .hero-avatar {
             width: 150px;
             height: 150px;
@@ -162,11 +155,7 @@
             overflow: hidden;
         }
 
-        .hero-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .hero-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
         @keyframes fadeInScaleUp {
             from { opacity: 0; transform: scale(0.8); }
@@ -196,7 +185,6 @@
             animation: fadeInUp 1s ease 0.6s forwards;
         }
 
-        /* Discord Status Section */
         #discord-status {
             display: flex;
             justify-content: center;
@@ -213,24 +201,13 @@
             backdrop-filter: blur(10px);
         }
 
-        .status-indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            transition: background-color 0.5s;
-        }
-        
+        .status-indicator { width: 12px; height: 12px; border-radius: 50%; transition: background-color 0.5s; }
         .online { background-color: #3ba55d; box-shadow: 0 0 10px #3ba55d; }
         .idle { background-color: #faa81a; box-shadow: 0 0 10px #faa81a; }
         .dnd { background-color: #ed4245; box-shadow: 0 0 10px #ed4245; }
         .offline { background-color: #747f8d; box-shadow: 0 0 10px #747f8d; }
-
-        .status-text {
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
+        .status-text { color: var(--text-secondary); font-weight: 500; }
         
-        /* Buttons */
         .cta-buttons {
             display: flex;
             gap: 1.5rem;
@@ -264,12 +241,65 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* General Section Styling */
         section { padding: 6rem 5%; max-width: 1200px; margin: 0 auto; }
         .section-title { font-size: 3rem; text-align: center; margin-bottom: 4rem; font-weight: 800; }
         .section-title::after { content: ''; display: block; width: 70px; height: 4px; background: var(--gradient); margin: 1rem auto; border-radius: 2px; }
 
-        /* Skills Section with SVGs */
+        /* --- New "About Me" Section --- */
+        .about-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .about-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .stat-item {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+        
+        .stat-item:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
+        }
+
+        .stat-item h4 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-item p { color: var(--text-secondary); font-size: 0.9rem; }
+        /* --- End of "About Me" CSS --- */
+
+
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -303,7 +333,6 @@
         .skill-name { font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 600; }
         .skill-description { color: var(--text-secondary); font-size: 0.95rem; }
 
-        /* Projects Section */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -324,79 +353,40 @@
             border-color: var(--accent-3);
         }
 
-        .project-image {
-            width: 100%;
-            height: 180px;
-            background: linear-gradient(135deg, var(--accent-2), var(--accent));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-        }
-
+        .project-image { width: 100%; height: 180px; background: linear-gradient(135deg, var(--accent-2), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
         .project-content { padding: 2rem; }
-        
-        .project-status {
-            display: inline-block;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
-            font-weight: bold;
-        }
-
-        .status-wip {
-            background: rgba(142, 68, 173, 0.2);
-            color: #a569bd;
-        }
-        
-        .status-live {
-            background: rgba(192, 57, 43, 0.2);
-            color: #e74c3c;
-        }
-
+        .project-status { display: inline-block; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; margin-bottom: 1rem; font-weight: bold; }
+        .status-wip { background: rgba(142, 68, 173, 0.2); color: #a569bd; }
+        .status-live { background: rgba(192, 57, 43, 0.2); color: #e74c3c; }
         .project-title { font-size: 1.6rem; margin-bottom: 1rem; }
         .project-description { color: var(--text-secondary); margin-bottom: 1.5rem; }
-        
         .project-links { display: flex; gap: 1rem; }
-
-        .btn-sm {
-            padding: 0.6rem 1.2rem;
-            font-size: 0.9rem;
-            border-radius: 30px;
-        }
+        .btn-sm { padding: 0.6rem 1.2rem; font-size: 0.9rem; border-radius: 30px; }
         
-        /* Contact Section */
         .contact-container { max-width: 600px; margin: 0 auto; text-align: center; }
         .contact-description { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem; }
 
-        /* Footer */
-        footer {
-            padding: 2rem 5%;
-            text-align: center;
-            color: var(--text-secondary);
-            border-top: 1px solid var(--border-color);
-            margin-top: 4rem;
-        }
+        footer { padding: 2rem 5%; text-align: center; color: var(--text-secondary); border-top: 1px solid var(--border-color); margin-top: 4rem; }
         
-        /* Scroll Animations */
         .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
         
-        /* Responsive */
+        @media (max-width: 900px) {
+            .about-container { grid-template-columns: 1fr; gap: 4rem; }
+        }
+
         @media (max-width: 768px) {
             .hero-title { font-size: 3rem; }
             .section-title { font-size: 2.5rem; }
             .nav-container { justify-content: space-between; width: 100%; }
             .menu-toggle { display: flex; }
-            .nav-links { display: none; /* Simplification for this example */ }
+            .nav-links { display: none; }
         }
 
     </style>
 </head>
 <body>
     <div class="spotlight"></div>
-    <!-- Loader -->
     <div id="loader">
         <div class="cube-loader">
             <div class="cube-face front"></div>
@@ -414,6 +404,7 @@
             <div class="logo">evilrexy41</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -426,7 +417,6 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <div class="hero-avatar">
-                <!-- IMPORTANT: Replace '1000429378.jpg' with the actual path or URL to your image -->
                 <img src="1000429378.jpg" alt="Evil Rexy Avatar">
             </div>
             <h1 class="hero-title">I'm <span class="gradient-text">Evil Rexy</span></h1>
@@ -440,12 +430,41 @@
             </div>
         </div>
     </section>
+    
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title fade-in">About <span class="gradient-text">Me</span></h2>
+        <div class="about-container">
+            <div class="about-text fade-in">
+                <h3>A Passionate Developer from India</h3>
+                <p>
+                    I'm a self-taught full-stack developer with a deep passion for creating innovative digital experiences. My journey started with a fascination for how technology can connect people, which led me to the world of Discord bot development. I thrive on solving complex problems and turning ambitious ideas into reality.
+                </p>
+                <p>
+                    Beyond just writing code, I focus on building communities and tools that are efficient, user-friendly, and impactful. Whether it's developing the FeroX Development community or engineering the next generation of Discord bots like Arvix and Laira, my goal is always to push the boundaries of what's possible.
+                </p>
+            </div>
+            <div class="about-stats fade-in">
+                <div class="stat-item">
+                    <h4>3+</h4>
+                    <p>Years of Experience</p>
+                </div>
+                <div class="stat-item">
+                    <h4>15+</h4>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="stat-item">
+                    <h4>10M+</h4>
+                    <p>Users Impacted</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Skills Section -->
     <section id="skills">
         <h2 class="section-title fade-in">My <span class="gradient-text">Skills</span></h2>
         <div class="skills-grid">
-            <!-- SVG icons inspired by your example image -->
             <div class="skill-card fade-in">
                 <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"></path><rect x="4" y="4" width="16" height="16" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
                 <h3 class="skill-name">Discord Bot Development</h3>
@@ -522,22 +541,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-
-            // --- New: Spotlight Effect ---
             const spotlight = document.querySelector('.spotlight');
             window.addEventListener('mousemove', (e) => {
                 spotlight.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
             });
 
-            // Loader
             setTimeout(() => {
                 document.getElementById('loader').classList.add('hidden');
             }, 2500);
 
-            // --- Discord Status Fetch ---
-            // IMPORTANT: Replace 'YOUR_DISCORD_USER_ID' with your actual Discord ID.
-            // You can get it by enabling Developer Mode in Discord, right-clicking your profile, and selecting "Copy User ID".
-            const DISCORD_ID = '925979118361624637'; // Example ID, replace this!
+            const DISCORD_ID = '1432771000629596225'; 
             const statusIndicator = document.querySelector('.status-indicator');
             const statusText = document.querySelector('.status-text');
 
@@ -563,7 +576,6 @@
                     statusText.textContent = 'Could not fetch status';
                 });
 
-            // Scroll Animations
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
