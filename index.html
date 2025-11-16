@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evil Rexy - Developer Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #050508;
+            --bg-card: rgba(15, 15, 20, 0.5);
+            --accent: #c0392b; /* Evil Red */
+            --accent-2: #8e44ad; /* Dark Purple */
+            --accent-3: #e74c3c; /* Lighter Red */
+            --text-primary: #fdfdfd;
+            --text-secondary: #a0a0b0;
+            --gradient: linear-gradient(135deg, #c0392b 0%, #8e44ad 100%);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        /* --- New Additions: Aurora & Spotlight --- */
+        .spotlight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            background: radial-gradient(circle at 50% 50%, rgba(192, 57, 43, 0.15), transparent 30%);
+            transition: transform 0.1s ease-out;
+        }
+
+        @keyframes aurora {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -3;
+            background: linear-gradient(125deg, #050508, #11081a, #050508);
+            background-size: 400% 400%;
+            animation: aurora 15s ease infinite;
+        }
+        /* --- End New Additions --- */
+
+        /* Enhanced Loading Animation */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s, visibility 1s;
+        }
+
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .cube-loader {
+            width: 75px;
+            height: 75px;
+            transform-style: preserve-3d;
+            transform: rotateX(-30deg) rotateY(-45deg);
+            animation: cube-rotate 2.5s infinite linear;
+        }
+
+        .cube-face {
+            width: 75px;
+            height: 75px;
+            position: absolute;
+            border: 2px solid var(--accent);
+            background: rgba(192, 57, 43, 0.1);
+            box-shadow: 0 0 20px var(--accent);
+        }
+
+        .front  { transform: translateZ(37.5px); }
+        .back   { transform: rotateY(180deg) translateZ(37.5px); }
+        .left   { transform: rotateY(-90deg) translateZ(37.5px); }
+        .right  { transform: rotateY(90deg) translateZ(37.5px); }
+        .top    { transform: rotateX(90deg) translateZ(37.5px); }
+        .bottom { transform: rotateX(-90deg) translateZ(37.5px); }
+
+        @keyframes cube-rotate {
+            0%   { transform: rotateX(-30deg) rotateY(-45deg); }
+            100% { transform: rotateX(-30deg) rotateY(315deg); }
+        }
+
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 15, 20, 0.4);
+            backdrop-filter: blur(25px) saturate(150%);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 0.8rem 1.5rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container { display: flex; align-items: center; gap: 2rem; }
+        .logo { font-size: 1.3rem; font-weight: 800; color: var(--text-primary); }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; transition: all 0.3s; font-weight: 500; }
+        .nav-links a:hover { color: var(--accent); }
+        .menu-toggle { display: none; }
+
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5%;
+            text-align: center;
+        }
+        
+        /* New Avatar Style */
+        .hero-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            margin: 0 auto 2rem;
+            opacity: 0;
+            animation: fadeInScaleUp 1s ease 0.2s forwards;
+            box-shadow: 0 0 40px rgba(192, 57, 43, 0.7);
+            overflow: hidden;
+        }
+
+        .hero-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes fadeInScaleUp {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+        
+        .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        /* Discord Status Section */
+        #discord-status {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            background: var(--bg-card);
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            margin: 0 auto 3rem;
+            max-width: fit-content;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.8s forwards;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            transition: background-color 0.5s;
+        }
+        
+        .online { background-color: #3ba55d; box-shadow: 0 0 10px #3ba55d; }
+        .idle { background-color: #faa81a; box-shadow: 0 0 10px #faa81a; }
+        .dnd { background-color: #ed4245; box-shadow: 0 0 10px #ed4245; }
+        .offline { background-color: #747f8d; box-shadow: 0 0 10px #747f8d; }
+
+        .status-text {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        /* Buttons */
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1s forwards;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s;
+            text-decoration: none;
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: var(--text-primary);
+            box-shadow: 0 0 30px rgba(192, 57, 43, 0.7);
+            transform: translateY(-5px);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* General Section Styling */
+        section { padding: 6rem 5%; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 3rem; text-align: center; margin-bottom: 4rem; font-weight: 800; }
+        .section-title::after { content: ''; display: block; width: 70px; height: 4px; background: var(--gradient); margin: 1rem auto; border-radius: 2px; }
+
+        /* Skills Section with SVGs */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s;
+            text-align: center;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .skill-icon {
+            height: 50px;
+            width: 50px;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            transition: color 0.3s;
+        }
+
+        .skill-card:hover .skill-icon { color: var(--text-primary); }
+        .skill-name { font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 600; }
+        .skill-description { color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent-3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, var(--accent-2), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .project-content { padding: 2rem; }
+        
+        .project-status {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .status-wip {
+            background: rgba(142, 68, 173, 0.2);
+            color: #a569bd;
+        }
+        
+        .status-live {
+            background: rgba(192, 57, 43, 0.2);
+            color: #e74c3c;
+        }
+
+        .project-title { font-size: 1.6rem; margin-bottom: 1rem; }
+        .project-description { color: var(--text-secondary); margin-bottom: 1.5rem; }
+        
+        .project-links { display: flex; gap: 1rem; }
+
+        .btn-sm {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+            border-radius: 30px;
+        }
+        
+        /* Contact Section */
+        .contact-container { max-width: 600px; margin: 0 auto; text-align: center; }
+        .contact-description { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem; }
+
+        /* Footer */
+        footer {
+            padding: 2rem 5%;
+            text-align: center;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+        
+        /* Scroll Animations */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3rem; }
+            .section-title { font-size: 2.5rem; }
+            .nav-container { justify-content: space-between; width: 100%; }
+            .menu-toggle { display: flex; }
+            .nav-links { display: none; /* Simplification for this example */ }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="spotlight"></div>
+    <!-- Loader -->
+    <div id="loader">
+        <div class="cube-loader">
+            <div class="cube-face front"></div>
+            <div class="cube-face back"></div>
+            <div class="cube-face left"></div>
+            <div class="cube-face right"></div>
+            <div class="cube-face top"></div>
+            <div class="cube-face bottom"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">evilrexy41</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle"><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-avatar">
+                <!-- IMPORTANT: Replace '1000429378.jpg' with the actual path or URL to your image -->
+                <img src="1000429378.jpg" alt="Evil Rexy Avatar">
+            </div>
+            <h1 class="hero-title">I'm <span class="gradient-text">Evil Rexy</span></h1>
+            <p class="hero-subtitle">Full Stack Developer & Discord Innovator</p>
+            <div id="discord-status">
+                <div class="status-indicator offline"></div>
+                <span class="status-text">Fetching Discord Status...</span>
+            </div>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn">View My Work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title fade-in">My <span class="gradient-text">Skills</span></h2>
+        <div class="skills-grid">
+            <!-- SVG icons inspired by your example image -->
+            <div class="skill-card fade-in">
+                <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"></path><rect x="4" y="4" width="16" height="16" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+                <h3 class="skill-name">Discord Bot Development</h3>
+                <p class="skill-description">Building powerful, scalable bots with Node.js and Python.</p>
+            </div>
+            <div class="skill-card fade-in">
+                <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                <h3 class="skill-name">Full Stack Development</h3>
+                <p class="skill-description">Crafting responsive web apps from front to back-end.</p>
+            </div>
+            <div class="skill-card fade-in">
+                <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                <h3 class="skill-name">Database Management</h3>
+                <p class="skill-description">Proficient with MongoDB and other NoSQL/SQL solutions.</p>
+            </div>
+            <div class="skill-card fade-in">
+                <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+                <h3 class="skill-name">UI/UX Design</h3>
+                <p class="skill-description">Designing intuitive and beautiful user interfaces.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title fade-in">Current <span class="gradient-text">Projects</span></h2>
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <div class="project-image">FD</div>
+                <div class="project-content">
+                    <span class="project-status status-live">LIVE</span>
+                    <h3 class="project-title">FeroX Development</h3>
+                    <p class="project-description">A development hub and community for creators. Join us to collaborate and innovate.</p>
+                    <div class="project-links">
+                        <a href="https://www.youtube.com/@FeroXDevelopment" target="_blank" class="btn btn-sm">YouTube</a>
+                        <a href="https://discord.gg/feroxdevs" target="_blank" class="btn btn-sm">Discord</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <div class="project-image">A</div>
+                <div class="project-content">
+                    <span class="project-status status-wip">COMING SOON</span>
+                    <h3 class="project-title">Arvix</h3>
+                    <p class="project-description">An all-in-one Discord bot designed to handle moderation, utilities, and more with high efficiency.</p>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <div class="project-image">L</div>
+                <div class="project-content">
+                    <span class="project-status status-wip">COMING SOON</span>
+                    <h3 class="project-title">Laira</h3>
+                    <p class="project-description">A high-quality Discord music bot aiming to provide a seamless and feature-rich listening experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title fade-in">Get In <span class="gradient-text">Touch</span></h2>
+        <div class="contact-container fade-in">
+            <p class="contact-description">I'm available for freelance work and open to new ideas. Feel free to reach out.</p>
+            <div class="cta-buttons">
+                <a href="mailto:contact@evilrexy.com" class="btn">Email Me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 evilrexy41. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- New: Spotlight Effect ---
+            const spotlight = document.querySelector('.spotlight');
+            window.addEventListener('mousemove', (e) => {
+                spotlight.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            });
+
+            // Loader
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 2500);
+
+            // --- Discord Status Fetch ---
+            // IMPORTANT: Replace 'YOUR_DISCORD_USER_ID' with your actual Discord ID.
+            // You can get it by enabling Developer Mode in Discord, right-clicking your profile, and selecting "Copy User ID".
+            const DISCORD_ID = '925979118361624637'; // Example ID, replace this!
+            const statusIndicator = document.querySelector('.status-indicator');
+            const statusText = document.querySelector('.status-text');
+
+            fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const { discord_status, activities } = data.data;
+                        statusIndicator.classList.remove('offline');
+                        statusIndicator.classList.add(discord_status);
+
+                        const mainActivity = activities.find(act => act.type === 0);
+                        if (mainActivity) {
+                            statusText.textContent = `Playing ${mainActivity.name}`;
+                        } else {
+                             statusText.textContent = discord_status.charAt(0).toUpperCase() + discord_status.slice(1);
+                        }
+                    } else {
+                         statusText.textContent = 'Status not available';
+                    }
+                })
+                .catch(() => {
+                    statusText.textContent = 'Could not fetch status';
+                });
+
+            // Scroll Animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => entry.target.classList.add('visible'), index * 100);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
