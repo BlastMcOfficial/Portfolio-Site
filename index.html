@@ -17,8 +17,8 @@
         :root {
             --bg-dark: #050508;
             --bg-card: rgba(20, 20, 25, 0.6);
-            --accent: #c0392b;
-            --accent-2: #8e44ad;
+            --accent: #c0392b; /* Evil Red */
+            --accent-2: #8e44ad; /* Dark Purple */
             --text-primary: #fdfdfd;
             --text-secondary: #a0a0b0;
             --gradient: linear-gradient(135deg, #c0392b 0%, #8e44ad 100%);
@@ -106,8 +106,8 @@
         .project-content { display: flex; flex-direction: column; height: 100%; }
         .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
         .project-title-group { display: flex; align-items: center; gap: 1rem; }
-        .project-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
-        .project-icon svg { width: 22px; height: 22px; color: var(--accent); }
+        .project-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); padding: 5px; }
+        .project-icon img { width: 100%; height: 100%; object-fit: contain; } /* Changed from svg to img */
         .project-title { font-size: 1.2rem; font-weight: 600; }
         .project-meta { text-align: right; }
         .project-meta span { background: rgba(255,255,255,0.1); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-top: 5px; }
@@ -200,7 +200,10 @@
                 <div class="project-content">
                     <div class="project-header">
                         <div class="project-title-group">
-                            <div class="project-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg></div>
+                            <div class="project-icon">
+                                <!-- REPLACE 'ferox-icon.png' with your image file -->
+                                <img src="ferox-icon.png" alt="FeroX Icon">
+                            </div>
                             <h3 class="project-title">FeroX Development</h3>
                         </div>
                         <div class="project-meta"><span title="Featured">⭐ Featured</span><span>Production</span></div>
@@ -217,7 +220,10 @@
                 <div class="project-content">
                     <div class="project-header">
                         <div class="project-title-group">
-                            <div class="project-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                            <div class="project-icon">
+                                <!-- REPLACE 'arvix-icon.png' with your image file -->
+                                <img src="arvix-icon.png" alt="Arvix Icon">
+                            </div>
                             <h3 class="project-title">Arvix</h3>
                         </div>
                         <div class="project-meta"><span>Coming Soon</span></div>
@@ -233,7 +239,10 @@
                 <div class="project-content">
                     <div class="project-header">
                         <div class="project-title-group">
-                            <div class="project-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"></path></svg></div>
+                            <div class="project-icon">
+                                <!-- REPLACE 'laira-icon.png' with your image file -->
+                                <img src="laira-icon.png" alt="Laira Icon">
+                            </div>
                             <h3 class="project-title">Laira</h3>
                         </div>
                         <div class="project-meta"><span>Coming Soon</span></div>
